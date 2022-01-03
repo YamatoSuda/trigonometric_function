@@ -2,3 +2,5 @@
 using Plots
 using Gtk
 include("tri_include.jl")
+
+
