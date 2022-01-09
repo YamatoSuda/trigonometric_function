@@ -27,6 +27,7 @@ showall(win)
 #=========================================================================================#
 
 #= Code2 =#
+#=
 win    = GtkWindow("Window name", 300, 300) 
 hbox   = GtkButtonBox(:h)
 ok     = GtkButton("OK")
@@ -37,7 +38,7 @@ push!(win, hbox)
 push!(hbox, cancel)
 push!(hbox, ok)
 showall(win)
-
+=#
 #=========================================================================================#
 #Code1の例では，okとcancelの箱の大きさがあまりキレイじゃない．
 #そこで，GtkButtonBoxが用意されている．これは，文字列の長さに応じて箱の大きさを変えてくれる関数となっている．
@@ -46,17 +47,22 @@ showall(win)
 #=========================================================================================#
 
 #= code3 =# 
-#= 
-b   = GtkButton("Press me")
-win = GtkWindow(b, "Callbacks")
+win  = GtkWindow("window name",300,300)
+a    = GtkButton("A button")
+b    = GtkButton("B button")
+hbox = GtkButtonBox(:h)
+push!(win,hbox)
+push!(hbox,a)
+push!(hbox,b)
 showall(win)
 
 function button_clicked_callback(widget)
-    println(widget, " was clicked!")
+    println(get_gtk_property(widget,:label,String)," was clicked!")
 end
 
-#id  = signal_connect(button_clicked_callback, b, "clicked")
-id2 = signal_connect(b, "clicked") do widget
-    println("\"", get_gtk_property(widget,:label,String), "\" was clicked!")
-end
+id1  = signal_connect(button_clicked_callback, b, "clicked")
+id2  = signal_connect(button_clicked_callback, a, "clicked")
+
+#=
+ボタンを押すことで文字を返すようにできた．
 =#
